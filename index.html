@@ -1,0 +1,571 @@
+<html>
+  <head>
+    <title>Accessibility Demo Page</title>
+
+    <link rel="shortcut icon" type="image/png" href="favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="style/site.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="js/site.js"></script>
+  </head>
+  <body lang="en-us">
+
+    <nav aria-role="navigation">
+      <ul aria-label="Accessibility Examples Navigation">
+        <li><a href="#button_examples">Buttons Examples</a></li>
+        <li><a href="#image_examples">Image Examples</a></li>
+        <li><a href="#form_examples">Form Examples</a></li>
+        <li><a href="#table_examples">Table Examples</a></li>
+        <li><a href="#screen_reader_help">Screen Reader Help</a></li>
+      </ul>
+    </nav>
+
+
+   <h1>Accessibility:  The Basics of Screen Readers</h1>
+
+      <ul class="example-list">
+        <li><!-- Buttons -->
+          <h2 id="button_examples">Buttons</h2>
+          <section class="bad">
+            <h3>Inaccessible Button</h3>
+            <div class="example-content">
+
+              <div class="button" id="clickable_div">
+                I look like a button, but I'm not a button.
+              </div>
+              <div>
+                If someone is directed to click the "button", the JAWS screen reader will not add this element to their list of buttons.
+              </div>
+            </div>
+
+            <div class="example-markup" aria-hidden="true">
+  <b>Markup</b>
+  <xmp><div class="button" id="clickable_div">
+    I look like a button, but I'm not a button.
+  </div></xmp>
+              <p class="problem">Problem:</p>
+              <p>Screen readers give users helpful list-menus of certain semantic html elements.  If an element which looks &amp; behaves like a button, but is not semantically a <b>&lt;button&gt;</b> html element, it is much more difficult for a visually impaired user to locate the control</p>
+            </div>
+            <div class="clearfix"> </div>
+          </section>
+
+          <section class="good">
+            <h3>Accessible Button</h3>
+            <div class="example-content">
+              <button class="button" id="clickable_button">
+                I am a REAL Button
+              </button>
+            </div>
+            <div class="example-markup" aria-hidden="true">
+            <b>Markup</b>
+<xmp><button class="button" id="clickable_button">
+  I am a REAL Button
+</button></xmp>
+              <p class="solution">Solution:</p>
+              <p>If it's a button, use a <b>&lt;button&gt;</b>!, they are semantically correct, and they work great for all users</p>
+            </div>
+            <div class="clearfix"> </div>
+          </section>
+        </li><!-- END Buttons -->
+
+        <li><!-- Images -->
+          <h2 id="image_examples">Image Examples</h2>
+          <section class="bad">
+            <div class="example-content">
+              <div>
+                 <p aria-hidden="true">These images do not have alt-tags.  So you hear the actual image file name</p>
+                <p aria-hidden="true"> Additionally, this Boba-Fett image in completely unrelevant.  It is of no use to a blind user and should not be read</p>
+              </div>
+              <div>
+                <img src="img/aria_html5.png" />
+                <img src="img/bobafett.jpeg" />
+              </div>
+            </div>
+            <div class="example-markup" aria-hidden="true">
+
+              <b>Markup</b>
+<xmp><div class="button" id="clickable_div">
+<img src="img/aria_html5.png" />
+<img src="img/bobafett.jpeg" />
+</div></xmp>
+              <p class="problem">Problem:</p>
+              <p>Images must have alt attribute tags. Even images we want ignored need one, just make its value an empty string</p>
+
+            </div>
+            <div class="clearfix"> </div>
+          </section>
+
+          <section class="good">
+            <div class="example-content">
+              <div>
+                <p aria-hidden="true">These images do not have alt-tags.  So you hear the actual image file name</p>
+                <p aria-hidden="true"> Additionally, this Boba-Fett image in completely unrelevant.  It is of no use to a blind user and should not be read</p>
+              </div>
+              <div>
+                <img src="img/aria_html5.png" alt="HTML5 ARIA Logo" />
+                <img src="img/bobafett.jpeg" alt="" />
+              </div>
+            </div>
+            <div class="example-markup" aria-hidden="true">
+
+            <b>Markup</b>
+<xmp><img src="img/aria_html5.png"
+     alt="HTML5 ARIA Logo" />
+<img src="img/bobafett.jpeg" alt="" />
+</xmp>
+              <p class="solution">Solution:</p>
+              <p>If your image is important in order to better understand the page content, use an <b>alt</b> attribute to describe your image.  If not, use an <b>alt</b> with an <b>empty string</b> to tell screen readers to ignore it.</p>
+
+            </div>
+            <div class="clearfix"> </div>
+          </section>
+        </li><!-- END Images -->
+
+        <li><!-- Forms -->
+          <h2 id="form_examples">Forms</h2>
+          <section class="bad">
+            <div class="example-content">
+              <p>Have Comments?</p>
+              <form action="" method="POST" class="bad-form">
+                <p>
+                  <span>First Name</span>
+                  <span class="error">Your first name is not cool enough</span>
+                  <input type="text" name="first_name" />
+                </p>
+                <p>
+                  <span>Last Name</span>
+                  <span class="error">Your last name has too many letters</span>
+                  <input type="text" name="last_name" />
+                </p>
+                <p>
+                  <span>Email</span>
+                  <span class="error">Starting to realize I just don't like you</span>
+                  <input type="text" name="email" />
+                </p>
+                <p>
+                  <span>Comments</span>
+                  <span class="error">Your comments are not helpful</span>
+                  <textarea></textarea>
+                </p>
+                <button type="submit" class="button" id="bad_show_errors">Show Errors</button>
+                <button type="submit" class="button submit">Submit</button>
+              </form>
+            </div>
+            <div class="example-markup" aria-hidden="true">
+
+            <b>Markup</b>
+<xmp><div class="button" id="clickable_div">
+<p>Have Comments?</p>
+<form action="" method="POST" class="bad-form">
+  <p>
+    <span>First Name</span>
+    <span class="error">
+      Your first name is not cool enough
+    </span>
+    <input type="text" name="first_name" />
+  </p>
+  <p>
+    <span>Last Name</span>
+    <span class="error">
+      Your last name has too many letters
+    </span>
+    <input type="text" name="last_name" />
+  </p>
+  <p>
+    <span>Email</span>
+    <span class="error">
+      Starting to realize I just don't like you
+    </span>
+    <input type="text" name="email" />
+  </p>
+  <p>
+    <span>Comments</span>
+    <span class="error">
+      Your comments are not helpful
+    </span>
+    <textarea></textarea>
+  </p>
+  <button type="submit"
+          class="button"
+          id="bad_show_errors">
+    Show Errors
+  </button>
+  <button type="submit"
+          class="button submit">
+    Submit
+  </button>
+</form>
+</div></xmp>
+              <p class="problem">Problem:</p>
+              <p>Without label tags, if a screen reader use is navigating directly through form input elements, they are not given any contextual info about the form field and what data it represents.  You must assign labels to inputs, and ideally give them html5 placeholder labels as well</p>
+
+            </div>
+            <div class="clearfix"> </div>
+          </section>
+
+          <section class="good">
+            <div class="example-content">
+              <p>Have Comments?<p>
+              <form action="" method="POST" class="good-form">
+                <p>
+                  <label for="first_name_field_good">First Name</label>
+                  <span class="error" id="first_name_field_good_error" aria-atomic=true role="alert">Your first name is not cool enough</span>
+                  <input type="text" name="first_name" id="first_name_field_good" placeholder="Enter First Name" />
+                </p>
+                <p>
+                  <label for="last_name_field_good">Last Name *</label>
+                  <span class="error" id="last_name_field_good_error" aria-atomic=true role="alert">Your last name has too many letters</span>
+                  <input type="text" name="last_name" id="last_name_field_good" placeholder="Enter Last Name" />
+                </p>
+                <p>
+                  <label for="email_field_good">Email</label>
+                  <span class="error" id="email_field_good_error" aria-atomic=true role="alert">Starting to realize I just don't like you</span>
+                  <input type="text" name="email" id="email_field_good" aria-required="true" required placeholder="Enter Email" />
+                </p>
+                <p>
+                  <label for="comments_field_good">Comments</label>
+                  <span class="error" id="comments_field_good_error" aria-atomic=true role="alert">Your comments are not helpful</span>
+                  <textarea name="comments" id="comments_field_good" placeholder="comments"></textarea>
+                </p>
+                <button type="submit" class="button" id="good_show_errors">Show Errors</button>
+                <button type="submit" class="button submit">Submit</button>
+              </form>
+
+              <p>Have Comments?</p>
+              <form action="" method="POST">
+                <fieldset>
+                  <legend>Your Contact Info:</legend>
+                  <p>
+                    <label for="first_name_field_good2">First Name</label>
+                    <input type="text" name="first_name" id="first_name_field_good2" placeholder="Enter First Name" />
+                  </p>
+                  <p>
+                    <label for="last_name_field_good2">Last Name</label>
+                    <input type="text" name="last_name" id="last_name_field_good2"  placeholder="Enter Last Name" />
+                  </p>
+                  <p>
+                    <label for="email_field_good2">Email</label>
+                    <input type="text" name="email" id="email_field_good2" placeholder="Enter Email" />
+                  </p>
+                </fieldset>
+                <fieldset>
+                  <legend>Your Comments:</legend>
+                  <p>
+                    <label for="comments_field_good2">Comments</label>
+                    <textarea name="comments" id="comments_field_good2" placeholder="comments"></textarea>
+                  </p>
+                </fieldset>
+                <button type="submit" class="button submit">Submit</button>
+              </form>
+            </div>
+            <div class="example-markup" aria-hidden="true">
+
+            <b>Markup</b>
+<xmp><form action="" method="POST" class="good-form">
+  <p>
+    <label for="first_name_field_good">
+      First Name
+    </label>
+    <span class="error"
+          id="first_name_field_good_error"
+          aria-atomic="true"
+          role="alert">
+      Your first name is not cool enough
+    </span>
+    <input type="text"
+           name="first_name"
+           id="first_name_field_good"
+           placeholder="Enter First Name" />
+  </p>
+  <p>
+    <label for="last_name_field_good">
+      Last Name *
+    </label>
+    <span class="error"
+          id="last_name_field_good_error"
+          aria-atomic=true
+          role="alert">
+      Your last name has too many letters
+    </span>
+    <input type="text"
+           name="last_name"
+           id="last_name_field_good"
+           placeholder="Enter Last Name" />
+  </p>
+  <p>
+    <label for="email_field_good">
+      Email
+    </label>
+    <span class="error"
+          id="email_field_good_error"
+          aria-atomic=true
+          role="alert">
+      Starting to realize I just don't like you
+    </span>
+    <input type="text"
+           name="email"
+           id="email_field_good"
+           aria-required="true"
+           required
+           placeholder="Enter Email" />
+  </p>
+  <p>
+    <label for="comments_field_good">
+      Comments
+    </label>
+    <span class="error"
+          id="comments_field_good_error"
+          aria-atomic=true
+          role="alert">
+      Your comments are not helpful
+    </span>
+    <textarea name="comments"
+              id="comments_field_good"
+              placeholder="comments"></textarea>
+  </p>
+  <button type="submit"
+          class="button submit">
+    Submit
+  </button>
+</form></xmp>
+              <p class="solution">Solution:</p>
+              <p>By coupling <b>&lt;input&gt;</b> tags with <b>&lt;label&gt;</b> tags, screen readers will read cues to a visually impaired user when they focus the input field.  Additionally, some readers support the <b>HTML5 placeholder attribute</b> which you can use to provide additional information.  <b>When displaying errors</b>, adding an <b>aria-invalid="true"</b> attribute to the input will let the user know the field is in error.</p>
+
+            </div>
+            <div class="clearfix"> </div>
+          </section>
+
+        </li><!-- END Forms -->
+
+        <li><!-- Tables -->
+          <h2 id="table_examples">Tables</h2>
+          <section class="bad">
+            <div class="example-content">
+              <table>
+                <tr>
+                  <td>Name</td>
+                  <td>Team</td>
+                  <td>Score</td>
+                  <td>Rank</td>
+                </tr>
+                <tr>
+                  <td>Dave</td>
+                  <td>The Champs</td>
+                  <td>10,800</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td>Steve</td>
+                  <td>The Nerds</td>
+                  <td>600</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>Louise</td>
+                  <td>The Nerds</td>
+                  <td>650</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <td>Linda</td>
+                  <td>The Champs</td>
+                  <td>900</td>
+                  <td>2</td>
+                </tr>
+              </table>
+              <p>It is pretty hard to tell where you are in this table</p>
+            </div>
+
+            <div class="example-markup" aria-hidden="true">
+
+            <b>Markup</b>
+<xmp><table>
+  <tr>
+    <td>Name</td>
+    <td>Team</td>
+    <td>Score</td>
+    <td>Rank</td>
+  </tr>
+  <tr>
+    <td>Dave</td>
+    <td>The Champs</td>
+    <td>10,800</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>Steve</td>
+    <td>The Nerds</td>
+    <td>600</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>Louise</td>
+    <td>The Nerds</td>
+    <td>650</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <td>Linda</td>
+    <td>The Champs</td>
+    <td>900</td>
+    <td>2</td>
+  </tr>
+</table></xmp>
+              <p class="problem">Problem:</p>
+              <p>Without a caption tag and heading (<b>TH</b> tags), it is very easy for a user to get completelely lost in the data.  Headings are repeatedly read by screen-readers as the user navigates, making the data much easier to understand.</p>
+            </div>
+            <div class="clearfix"> </div>
+          </section>
+
+          <section class="good">
+            <div class="example-content">
+              <table>
+                <caption>Pac-Man High Scores For The Week</caption>
+                <tr>
+                  <th>Name</th>
+                  <th>Team</th>
+                  <th>Score</th>
+                  <th>Rank</th>
+                </tr>
+                <tr>
+                  <th>Dave</th>
+                  <td>The Champs</td>
+                  <td>10,800</td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <th>Steve</th>
+                  <td>The Nerds</td>
+                  <td>600</td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <th>Louise</th>
+                  <td>The Nerds</td>
+                  <td>650</td>
+                  <td>3</td>
+                </tr>
+                <tr>
+                  <th>Linda</th>
+                  <td>The Champs</td>
+                  <td>900</td>
+                  <td>2</td>
+                </tr>
+              </table>
+            </div>
+
+            <div class="example-markup" aria-hidden="true">
+
+            <b>Markup</b>
+<xmp><table>
+  <caption>
+    Pac-Man High Scores For The Week
+  </caption>
+  <tr>
+    <th>Name</th>
+    <th>Team</th>
+    <th>Score</th>
+    <th>Rank</th>
+  </tr>
+  <tr>
+    <th>Dave</th>
+    <td>The Champs</td>
+    <td>10,800</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <th>Steve</th>
+    <td>The Nerds</td>
+    <td>600</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <th>Louise</th>
+    <td>The Nerds</td>
+    <td>650</td>
+    <td>3</td>
+  </tr>
+  <tr>
+    <th>Linda</th>
+    <td>The Champs</td>
+    <td>900</td>
+    <td>2</td>
+  </tr>
+</table></xmp>
+              <p class="solution">Solution:</p>
+              <p>A <b>&lt;caption&rt;</p> tag will be read to a visually impaired user when they navigate to your table.  In addition, when you label column headers and row headers with <b>&lt;th&rt;</b> tags, readers will repeat the respective headings when reading data from the table.  This is crucial as it is easy to lose context when browsing through many data cells.
+            </div>
+            <div class="clearfix"> </div>
+          </section>
+        </li><!-- END Tables -->
+
+      </ul>
+      <div class="clearfix"> </div>
+    </div>
+
+<hr />
+
+    <h2 id="screen_reader_help">Screen Reader Help &amp; Resources</h3>
+    <div class="help">
+      <p>
+        The industry standard screen reader for PC is called <b>JAWS</b>.  It has roughly 90% of the market share and is the standard program that comapnies would like us to test with.<br /><br />
+        When using JAWS it is important to start the program prior to opening a browser.
+      </p>
+      <p>
+        As Mac users &amp; developers, we have access to a great screen reader called <b>Voiceover</b> which is included as a part of the OSX operating system.  <b>Voiceover</b> can be enabled with the shortcut key <b>command-F5</b> or via the <b>System Preferences</b> menus as pictured below.
+      </p>
+
+      <img src="img/accessibility_menu.jpg" />
+      <br />
+      <img src="img/enable_voiceover_menu.jpg" />
+
+      <p>
+        Screen Readers are very complex Applications with large amounts of keyboard shortcuts to learn.  Here are a few links to some help on getting started.
+      </p>
+
+      <h3>A few very useful Voiceover commands</h3>
+      <ul class="help">
+        <li>
+            The "voiceover keystroke", denoted as <b>VO</b> is the combination of<br />
+            <b>Control + Option</b>
+        </li>
+        <li>
+            To toggle voiceover on and off<br />
+            <b>Command-F5</b>
+        </li>
+        <li>
+            You can stop voiceover from speaking at any time with<br />
+            <b>Control</b>
+        </li>
+        <li>
+            To open the voiceover help menu<br />
+            <b>VO + H</b>
+        </li>
+        <li>
+            To open the voiceover commands help menu<br />
+            <b>VO + HH</b>
+        </li>
+        <li>
+          To open the Voiceover speech attributes menu<br />
+          <b>VO + Command + left arrow</b>
+        </li>
+      </ul>
+
+      <h3>Screen Reader Help Links</h3>
+      <ul class="help">
+        <li><a href="https://www.apple.com/accessibility/osx/voiceover/">Apple Voiceover Product Page</a></li>
+        <li><a href="http://help.apple.com/voiceover/info/guide/10.8/English.lproj/">Apple Voiceover getting started guide</a></li>
+        <li><a href="http://accessibility.psu.edu/voiceover">Penn State's Voiceover Commands Guide</a></li>
+        <li><a href="http://www.applevis.com/guides/voiceover-keyboard-shortcuts-mac-os-x">AppliVis.com's Voiceover Keyboard Shortcuts Page</a></li>
+        <li><a href="http://www.freedomscientific.com/Products/Blindness/Jaws">JAWS homepage from Freedom Scientific</a></li>
+      </ul>
+
+    </div>
+
+
+
+  </body>
+</html>
+
