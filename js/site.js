@@ -1,7 +1,10 @@
 $(function() {
 
-  $('#clickable_div, #clickable_button').on('click', function() {
+  $('#clickable_div').on('click', function() {
     alert('You just clicked a button-like element');
+  });
+  $('#clickable_button').on('click', function() {
+    alert('You just clicked a REAL button');
   });
 
   $("button.submit").on('click', function(e) {

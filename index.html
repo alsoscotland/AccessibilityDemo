@@ -27,7 +27,7 @@
 
       <ul class="example-list">
         <li><!-- Buttons -->
-          <h2 id="button_examples">Buttons</h2>
+          <h2 id="button_examples" tabindex="-1">Buttons</h2>
           <section class="bad">
             <h3>Inaccessible Button</h3>
             <div class="example-content">
@@ -36,15 +36,15 @@
                 I look like a button, but I'm not a button.
               </div>
               <div>
-                If someone is directed to click the "button", the JAWS screen reader will not add this element to their list of buttons.
+                If someone is directed to click the "button", the screen readers will not add this element to their list of buttons.
               </div>
             </div>
 
             <div class="example-markup" aria-hidden="true">
   <b>Markup</b>
   <xmp><div class="button" id="clickable_div">
-    I look like a button, but I'm not a button.
-  </div></xmp>
+  I look like a button, but I'm not a button.
+</div></xmp>
               <p class="problem">Problem:</p>
               <p>Screen readers give users helpful list-menus of certain semantic html elements.  If an element which looks &amp; behaves like a button, but is not semantically a <b>&lt;button&gt;</b> html element, it is much more difficult for a visually impaired user to locate the control</p>
             </div>
@@ -71,12 +71,12 @@
         </li><!-- END Buttons -->
 
         <li><!-- Images -->
-          <h2 id="image_examples">Image Examples</h2>
+          <h2 id="image_examples" tabindex="-1">Image Examples</h2>
           <section class="bad">
             <div class="example-content">
               <div>
                  <p aria-hidden="true">These images do not have alt-tags.  So you hear the actual image file name</p>
-                <p aria-hidden="true"> Additionally, this Boba-Fett image in completely unrelevant.  It is of no use to a blind user and should not be read</p>
+                <p aria-hidden="true"> Additionally, this Boba-Fett image in completely irrelevant.  It is of no use to a blind user and should not be read</p>
               </div>
               <div>
                 <img src="img/aria_html5.png" />
@@ -100,8 +100,9 @@
           <section class="good">
             <div class="example-content">
               <div>
-                <p aria-hidden="true">These images do not have alt-tags.  So you hear the actual image file name</p>
-                <p aria-hidden="true"> Additionally, this Boba-Fett image in completely unrelevant.  It is of no use to a blind user and should not be read</p>
+
+                 <p aria-hidden="true">These first of these two images has an alt-tag with a contextual text value.  Screen Readers will read this information when they encounter the image.</p>
+                <p aria-hidden="true"> The Boba-Fett image, being irrelevant, has its alt-tag set to be an empty string.  This will make screen reader software ignore the image altogether</p>
               </div>
               <div>
                 <img src="img/aria_html5.png" alt="HTML5 ARIA Logo" />
@@ -124,7 +125,7 @@
         </li><!-- END Images -->
 
         <li><!-- Forms -->
-          <h2 id="form_examples">Forms</h2>
+          <h2 id="form_examples" tabindex="-1">Forms</h2>
           <section class="bad">
             <div class="example-content">
               <p>Have Comments?</p>
@@ -340,7 +341,7 @@
         </li><!-- END Forms -->
 
         <li><!-- Tables -->
-          <h2 id="table_examples">Tables</h2>
+          <h2 id="table_examples" tabindex="-1">Tables</h2>
           <section class="bad">
             <div class="example-content">
               <table>
@@ -507,10 +508,10 @@
 
 <hr />
 
-    <h2 id="screen_reader_help">Screen Reader Help &amp; Resources</h3>
+    <h2 id="screen_reader_help" tabindex="-1">Screen Reader Help &amp; Resources</h3>
     <div class="help">
       <p>
-        The industry standard screen reader for PC is called <b>JAWS</b>.  It has roughly 90% of the market share and is the standard program that comapnies would like us to test with.<br /><br />
+        The industry standard screen reader for PC is called <b>JAWS</b>.  It has roughly 90% of the market share and is the standard program that companies would like us to test with.<br /><br />
         When using JAWS it is important to start the program prior to opening a browser.
       </p>
       <p>
